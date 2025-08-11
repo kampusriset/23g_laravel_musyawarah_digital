@@ -15,7 +15,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/RvXRN"><img src="https://avatars.githubusercontent.com/u/112039501?v=4?s=100" width="100px;" alt="Rizki Anas Mustakim"/><br /><sub><b>Rizki Anas Mustakim</b></sub></a><br /><a href="https://github.com/RvXRn/tugas-musyawarah-laravel/commits?author=RvXRN" title="Code">💻</a> <a href="https://github.com/RvXRn/tugas-musyawarah-laravel/commits?author=RvXRN" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/RvXRN"><img src="https://avatars.githubusercontent.com/u/112039501?v=4?s=100" width="100px;" alt="Rizki Anas Mustakim"/><br /><sub><b>Rizki Anas Mustakim</b></sub></a><br /><a href="https://github.com/RvXRn/tugas-musyawarah-laravel/commits?author=RvXRN" title="Code">💻</a> <a href="https://github.com/RvXRn/tugas-musyawarah-laravel/commits?author=RvXRN" title="Documentation">📖</a> <a href="#ideas-RvXRN" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-RvXRN" title="Maintenance">🚧</a> <a href="#projectManagement-RvXRN" title="Project Management">📆</a> <a href="https://github.com/RvXRn/tugas-musyawarah-laravel/pulls?q=is%3Apr+reviewed-by%3ARvXRN" title="Reviewed Pull Requests">👀</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/KangNaufal458"><img src="https://avatars.githubusercontent.com/u/188632313?v=4?s=100" width="100px;" alt="BronaufalZS"/><br /><sub><b>BronaufalZS</b></sub></a><br /><a href="#design-KangNaufal458" title="Design">🎨</a></td>
     </tr>
   </tbody>
