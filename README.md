@@ -56,6 +56,7 @@ cara menjalankan project ini
 git clone https://github.com/kampusriset/23g_laravel_musyawarah_digital
 cd 23g_laravel_musyawarah_digital
 composer install
+copy .env.example .env
 php artisan migrate
 php artisan serve
 ```

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->enum('is_active', [0, 1]);
             $table->string('nama_lengkap');
             $table->enum('gender', ["M", "F"]);
+            $table->string('role');
             $table->timestamps();
         });
     }
