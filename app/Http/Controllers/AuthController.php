@@ -37,7 +37,7 @@ class AuthController extends Controller
                 $request->session()->regenerate();
                 return redirect()->route('home')->with("success", "Login Berhasil Anda Akan Di Alihkan Ke Dashboard");
             }
-            return back()-with("error", "Username Atau Password Salah");
+            return back()->with("error", "Username Atau Password Salah");
     }
     public function registerCreate(Request $request){
         $request->validate([

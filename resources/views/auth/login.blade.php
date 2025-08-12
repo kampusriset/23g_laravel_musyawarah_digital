@@ -3,10 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script src="https://cdn.tailwindcss.com"></script>
+    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
+    {{-- {{ session('success') }} --}}
 </head>
 <body class="bg-[#06142E] h-screen flex items-center justify-center">
+      @if(session('success'))
+  <script>
+  window.onload = function(){
+    Swal.fire({
+      icon: 'success',
+      title: 'Berhasil!',
+      text: "{{ session('success') }}",
+      showConfirmButton: true
+    });
+  };
+  </script>
+@endif
+
+@if(session('error'))
+<script>
+  window.onload = function(){
+  Swal.fire({
+    icon: 'error',
+    title: 'Gagal!',
+    text: "{{ session('error') }}",
+    showConfirmButton: true
+  });
+};
+</script>
+@endif
     <div class="flex bg-[#06142E] text-white w-full max-w-5xl shadow-lg rounded-lg overflow-hidden">
         <!-- Left Illustration -->
         <div class="hidden md:flex flex-col items-center justify-center w-1/2 p-10">
@@ -20,7 +45,7 @@
                 @csrf
                 <div>
                     <label for="email" class="block text-sm mb-1">Email</label>
-                    <input type="email" name="email" id="email" required class="w-full px-4 py-2 rounded bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    <input type="text" name="email" id="email" required class="w-full px-4 py-2 rounded bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-400">
                 </div>
                 <div>
                     <label for="password" class="block text-sm mb-1">Password</label>
@@ -36,6 +61,7 @@
             </form>
         </div>
     </div>
-    @include('sweetalert::alert')
+    
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </body>
 </html>
