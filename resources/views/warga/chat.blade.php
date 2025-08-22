@@ -8,7 +8,7 @@
 
 <script src="{{ asset('js/chat.js') }}"></script>
 <script>
-const userId = {{ auth('warga')->id() }};
+const userId = {{ auth('web')->id() }};
 const wsUrl = 'ws://localhost:3000';
 initChat(wsUrl, userId);
 </script>

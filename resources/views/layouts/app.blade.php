@@ -23,7 +23,7 @@
       <li><a href="{{ route('warga.presensi') }}">Presensi</a></li>
     </ul>
     <div>
-      @auth('warga')
+      @auth('web')
         <form action="{{ route('logout') }}" method="POST">@csrf <button type="submit">Logout</button></form>
       @endauth
     </div>

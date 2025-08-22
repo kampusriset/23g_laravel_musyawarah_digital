@@ -17,7 +17,7 @@
 
 <script src="{{ asset('js/notulen.js') }}"></script>
 <script>
-const userId = {{ auth('warga')->id() }};
+const userId = {{ auth('warga')->id('id_warga') }};
 const wsUrl = 'ws://localhost:3000';
 initNotulen(wsUrl, userId);
 </script>

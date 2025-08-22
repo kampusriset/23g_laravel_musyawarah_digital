@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
 @section('title','Dashboard Warga')
-
 @section('content')
 <div class="flex flex-col lg:flex-row items-center justify-between gap-10">
     <section class="max-w-xl text-left relative z-10">
+        <h1>Selamat datang, {{ $warga->nama_lengkap }}</h1>
+        {{-- @dd($warga->id_warga) --}}
         <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight text-[#d9dce6]">
             Sugeng Rawuh <br> Wonten SI MUDI
         </h1>
