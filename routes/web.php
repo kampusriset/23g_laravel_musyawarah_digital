@@ -2,46 +2,47 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\Warga\HomeController;
-use App\Http\Controllers\Warga\ChatController;
+use App\Http\Controllers\Warga\ObrolanController;
 use App\Http\Controllers\Warga\NotulenController;
 use App\Http\Controllers\Warga\VotingController;
 use App\Http\Controllers\Warga\PresensiController;
 
-// Guest pages
-Route::get('/', [HomeController::class,'guestHome'])->name('guest.home');
-Route::get('/about', [HomeController::class,'about'])->name('guest.about');
-Route::get('/contact', [HomeController::class,'contact'])->name('guest.contact');
+// Guest (tanpa login)
+Route::get('/',        [GuestController::class,'home'])->name('guest.home');
+Route::get('/about',   [GuestController::class,'about'])->name('guest.about');
+Route::get('/contact', [GuestController::class,'contact'])->name('guest.contact');
 
 // Auth
-Route::get('/login', [AuthController::class,'loginView'])->name('login.view');
-Route::post('/login', [AuthController::class,'loginCreate'])->name('login.create');
+Route::get('/login',    [AuthController::class,'loginView'])->name('login.view');
+Route::post('/login',   [AuthController::class,'loginCreate'])->name('login.create');
 Route::get('/register', [AuthController::class,'registerView'])->name('register.view');
-Route::post('/register', [AuthController::class,'registerCreate'])->name('register.create');
-Route::post('/logout', [AuthController::class,'logout'])->name('logout');
+Route::post('/register',[AuthController::class,'registerCreate'])->name('register.create');
+Route::post('/logout',  [AuthController::class,'logout'])->name('logout');
 
-// Warga pages
-Route::middleware(['auth:web'])->prefix('warga')->group(function(){
-    Route::get('/home', [HomeController::class,'index'])->name('warga.home');
-    Route::get('/chat', [ChatController::class,'index'])->name('warga.chat');
-    Route::get('/notulen', [NotulenController::class,'index'])->name('warga.notulen');
-    Route::get('/voting', [VotingController::class,'index'])->name('warga.voting');
-    Route::get('/presensi', [PresensiController::class,'index'])->name('warga.presensi');
-});
-// Add this temporary route to test
-Route::get('/debug-auth', function () {
-    return response()->json([
-        'web_guard' => [
-            'authenticated' => auth('web')->check(),
-            'user_id' => auth('web')->id(),
-            'user_type' => auth('web')->user() ? get_class(auth('web')->user()) : null
-        ],
-        'warga_guard' => [
-            'authenticated' => auth('warga')->check(),
-            'user_id' => auth('warga')->id(),
-            'user_type' => auth('warga')->user() ? get_class(auth('warga')->user()) : null
-        ],
-        'session_id' => session()->getId(),
-        'cookies' => array_keys(request()->cookies->all())
-    ]);
+// Warga (harus login)
+Route::middleware(['auth:web'])->prefix('warga')->name('warga.')->group(function () {
+    Route::get('/home', [HomeController::class,'index'])->name('home');
+
+    // Chat (Obrolan CRUD + lampiran sederhana)
+    Route::resource('obrolan', ObrolanController::class);
+
+    // Notulensi CRUD
+    Route::resource('notulen', NotulenController::class);
+
+    // Voting: CRUD Usulan + aksi vote
+    Route::get('voting',                 [VotingController::class,'index'])->name('voting.index');
+    Route::get('voting/create',          [VotingController::class,'create'])->name('voting.create');
+    Route::post('voting',                [VotingController::class,'store'])->name('voting.store');
+    Route::get('voting/{id}/edit',       [VotingController::class,'edit'])->name('voting.edit');
+    Route::put('voting/{id}',            [VotingController::class,'update'])->name('voting.update');
+    Route::delete('voting/{id}',         [VotingController::class,'destroy'])->name('voting.destroy');
+    Route::post('voting/{id}/vote',      [VotingController::class,'vote'])->name('voting.vote');
+
+    // Presensi CRUD sederhana
+    Route::get('presensi',               [PresensiController::class,'index'])->name('presensi.index');
+    Route::get('presensi/create',        [PresensiController::class,'create'])->name('presensi.create');
+    Route::post('presensi',              [PresensiController::class,'store'])->name('presensi.store');
+    Route::delete('presensi/{id}',       [PresensiController::class,'destroy'])->name('presensi.destroy');
 });

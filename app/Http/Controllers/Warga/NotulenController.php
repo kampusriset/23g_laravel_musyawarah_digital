@@ -8,25 +8,53 @@ use Illuminate\Http\Request;
 
 class NotulenController extends Controller
 {
-    public function index() {
-        $notulens = Notulen::orderBy('created_at','desc')->get();
-        return view('warga.notulen',compact('notulens'));
+    public function index()
+    {
+        $items = Notulen::orderByDesc('id_notulen')->paginate(10);
+        return view('warga.notulen.index', compact('items'));
     }
 
-    public function store(Request $request){
-        $request->validate(['judul'=>'required','catatan'=>'required']);
-        $notulen = Notulen::create([
-            'judul_musyawarah'=>$request->judul,
-            'catatan'=>$request->catatan,
-            'status'=>'draft',
-            'admin_id'=>auth('warga')->id()
+    public function create(){ return view('warga.notulen.create'); }
+
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'judul_musyawarah' => 'required|string|max:255',
+            'total_hadir'      => 'nullable|integer|min:0',
+            'total_undangan'   => 'nullable|integer|min:0',
+            'catatan'          => 'nullable|string',
+            'hasil_keputusan'  => 'nullable|string',
+            'status'           => 'required|in:draft,selesai,ditunda',
         ]);
-        return response()->json($notulen);
+        $data['admin_id'] = auth()->id();
+        Notulen::create($data);
+        return redirect()->route('warga.notulen.index')->with('success','Notulen disimpan');
     }
 
-    public function update(Request $request, $id){
-        $notulen = Notulen::findOrFail($id);
-        $notulen->update(['catatan'=>$request->catatan]);
-        return response()->json($notulen);
+    public function edit($id)
+    {
+        $item = Notulen::findOrFail($id);
+        return view('warga.notulen.edit', compact('item'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $item = Notulen::findOrFail($id);
+        $data = $request->validate([
+            'judul_musyawarah' => 'required|string|max:255',
+            'total_hadir'      => 'nullable|integer|min:0',
+            'total_undangan'   => 'nullable|integer|min:0',
+            'catatan'          => 'nullable|string',
+            'hasil_keputusan'  => 'nullable|string',
+            'status'           => 'required|in:draft,selesai,ditunda',
+        ]);
+        $item->update($data);
+        return redirect()->route('warga.notulen.index')->with('success','Notulen diupdate');
+    }
+
+    public function destroy($id)
+    {
+        Notulen::findOrFail($id)->delete();
+        return back()->with('success','Notulen dihapus');
     }
 }

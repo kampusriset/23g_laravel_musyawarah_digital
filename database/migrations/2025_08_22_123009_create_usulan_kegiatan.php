@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('judul_usulan');
             $table->text('deskripsi')->nullable();
             $table->decimal('anggaran_estimasi', 15, 2)->nullable();
-            $table->enum('status_usulan', ['pending','approved','rejected'])->default('pending');
+            $table->enum('status_usulan', ['draft','selesai','ditunda'])->default('draft');
             $table->timestamps();
 
             $table->foreign('warga_id')->references('id_warga')->on('warga')->onDelete('cascade');

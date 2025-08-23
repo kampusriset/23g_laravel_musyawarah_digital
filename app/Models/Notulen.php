@@ -1,8 +1,17 @@
 <?php
+
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
 
-class Notulen extends Model{
+class Notulen extends Model
+{
     protected $table = 'notulen';
-    protected $fillable=['judul','content','status'];
+    protected $primaryKey = 'id_notulen';
+    public $timestamps = true;
+
+    protected $fillable = [
+        'judul_musyawarah','total_hadir','total_undangan',
+        'catatan','hasil_keputusan','status','admin_id'
+    ];
 }

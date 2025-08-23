@@ -3,7 +3,7 @@
 @section('title', 'Register')
 
 @section('content')
-<div class="flex items-center justify-center h-screen">
+<div class="flex items-center justify-center h-screen my-14">
     <div class="bg-[#06142E] text-white w-full max-w-2xl shadow-lg rounded-lg overflow-hidden p-10">
         <h2 class="text-3xl font-semibold mb-8">Register</h2>
 

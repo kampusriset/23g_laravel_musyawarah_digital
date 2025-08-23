@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -6,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Presensi extends Model
 {
     protected $table = 'presensi';
+    protected $primaryKey = 'id_presensi';
+    public $timestamps = true;
+
     protected $fillable = ['agenda_id','warga_id','waktu_hadir','metode_presensi'];
-    public function warga() { return $this->belongsTo(Warga::class,'warga_id'); }
+    protected $casts = ['waktu_hadir'=>'datetime'];
 }

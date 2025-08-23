@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('metode_presensi')->nullable();
             $table->timestamps();
 
-            $table->foreign('agenda_id')->references('id_agenda')->on('agenda')->onDelete('cascade');
+            // $table->foreign('agenda_id')->references('id_agenda')->on('agenda')->onDelete('cascade');
             $table->foreign('warga_id')->references('id_warga')->on('warga')->onDelete('cascade');
         });
     }

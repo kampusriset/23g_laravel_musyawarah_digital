@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('obrolan', function (Blueprint $table) {
             $table->increments('id_obrolan');
             $table->unsignedInteger('warga_id');
-            $table->unsignedInteger('agenda_id');
+            $table->unsignedInteger('agenda_id')->nullable();
             $table->text('pesan');
             $table->enum('tipe_pesan', ['text','image','file','system'])->default('text');
             $table->unsignedInteger('parent_id')->nullable();
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('warga_id')->references('id_warga')->on('warga')->onDelete('cascade');
-            $table->foreign('agenda_id')->references('id_agenda')->on('agenda')->onDelete('cascade');
+            // $table->foreign('agenda_id')->references('id_agenda')->on('agenda')->onDelete('cascade');
             $table->foreign('parent_id')->references('id_obrolan')->on('obrolan')->onDelete('cascade');
         });
     }
